@@ -1,0 +1,19 @@
+<idea-plugin>
+  <version>1.0-SNAPSHOT</version>
+  <change-notes><![CDATA[Initial release]]></change-notes>
+  <description><![CDATA[Highlights Vue components in different colors.
+- Custom components in #23A27F
+- Boolean/null literals in #FF9E64]]></description>
+  <idea-version since-build="241" until-build="243.*" />
+  <id>com.example.boolean-highlighter</id>
+  <name>Boolean Highlighter</name>
+  <vendor>YourName</vendor>
+  <depends>com.intellij.modules.platform</depends>
+  <depends>JavaScript</depends>
+  <depends>org.jetbrains.plugins.vue</depends>
+  <depends>com.intellij.modules.xml</depends>
+  <extensions defaultExtensionNs="com.intellij">
+    <annotator language="Vue" implementationClass="com.example.booleanhighlighter.VueHighlighterAnnotator" />
+    <xml.tagNameProvider implementation="com.example.booleanhighlighter.VueHighlighterAnnotator" />
+  </extensions>
+</idea-plugin>

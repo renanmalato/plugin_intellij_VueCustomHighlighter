@@ -1,0 +1,18 @@
+<idea-plugin>
+    <id>com.example.vue-custom-highlighter</id>
+    <name>Vue Custom Highlighter</name>
+    <vendor>Renan Malato</vendor>
+
+    <depends>com.intellij.modules.platform</depends>
+    <depends>JavaScript</depends>
+    <depends>org.jetbrains.plugins.vue</depends>
+    <depends>com.intellij.modules.xml</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <annotator 
+            language="Vue" 
+            implementationClass="com.example.booleanhighlighter.VueHighlighterAnnotator"/>
+        <xml.tagNameProvider 
+            implementation="com.example.booleanhighlighter.VueHighlighterAnnotator"/>
+    </extensions>
+</idea-plugin>
