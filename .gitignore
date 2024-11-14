@@ -3,4 +3,5 @@ node_modules/
 *.log
 dist/
 .env
-build/
+.build/
+.gradle/

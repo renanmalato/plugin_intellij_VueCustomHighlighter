@@ -5,9 +5,9 @@
 - Custom components in #23A27F
 - Boolean/null literals in #FF9E64]]></description>
   <idea-version since-build="241" until-build="243.*" />
-  <id>com.example.boolean-highlighter</id>
-  <name>Boolean Highlighter</name>
-  <vendor>YourName</vendor>
+  <id>com.example.vue-custom-highlighter</id>
+  <name>Vue Custom Highlighter</name>
+  <vendor>Renan Malato</vendor>
   <depends>com.intellij.modules.platform</depends>
   <depends>JavaScript</depends>
   <depends>org.jetbrains.plugins.vue</depends>
