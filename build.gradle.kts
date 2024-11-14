@@ -34,4 +34,10 @@ tasks {
         """.trimIndent())
         changeNotes.set("Initial release")
     }
+
+    compileKotlin {
+        kotlinOptions {
+            jvmTarget = "17"
+        }
+    }
 }

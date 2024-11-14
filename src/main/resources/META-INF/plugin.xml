@@ -12,6 +12,9 @@
         <annotator 
             language="Vue" 
             implementationClass="com.example.booleanhighlighter.VueHighlighterAnnotator"/>
+        <annotator 
+            language="JavaScript" 
+            implementationClass="com.example.booleanhighlighter.VueHighlighterAnnotator"/>
         <xml.tagNameProvider 
             implementation="com.example.booleanhighlighter.VueHighlighterAnnotator"/>
     </extensions>

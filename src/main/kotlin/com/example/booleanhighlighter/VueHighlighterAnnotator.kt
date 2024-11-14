@@ -13,13 +13,12 @@ import java.awt.Color
 
 class VueHighlighterAnnotator : Annotator {
     companion object {
-        private val STANDARD_HTML_TAGS = setOf(
-            "script", 
-            "style"
-        )
-
         private val FORCE_INCLUDE_TAGS = setOf(
-            "template"  // Tags we want to treat as custom components
+            "template",
+            "slot",
+            "component",
+            "transition",
+              // Tags we want to treat as custom components
         )
 
         val CUSTOM_TAG_ATTRIBUTES = TextAttributes().apply {
@@ -30,9 +29,28 @@ class VueHighlighterAnnotator : Annotator {
             "VUE_CUSTOM_TAG",
             CUSTOM_TAG_ATTRIBUTES
         )
+
+        // For boolean and null values (orange)
+        val BOOLEAN_ATTRIBUTES = TextAttributes().apply {
+            foregroundColor = Color(0xFF, 0x9E, 0x64)  // FF9E64 (Orange)
+        }
+
+        val BOOLEAN_LITERAL = TextAttributesKey.createTextAttributesKey(
+            "CUSTOM_JS_LITERAL",
+            BOOLEAN_ATTRIBUTES
+        )
     }
 
     override fun annotate(element: PsiElement, holder: AnnotationHolder) {
+        // First check for boolean/null literals regardless of context
+        if (element.text in setOf("true", "false", "null")) {
+            holder.newSilentAnnotation(HighlightSeverity.INFORMATION)
+                .textAttributes(BOOLEAN_LITERAL)
+                .create()
+            return  // Early return after handling boolean/null
+        }
+
+        // Then handle custom components
         when (element) {
             is XmlTag -> {
                 if (isCustomComponent(element.name)) {
@@ -54,31 +72,16 @@ class VueHighlighterAnnotator : Annotator {
                     }
                 }
             }
-            is XmlToken -> {
-                if (element.tokenType == XmlTokenType.XML_DATA_CHARACTERS &&
-                    element.text in setOf("true", "false", "null")) {
-                    holder.newSilentAnnotation(HighlightSeverity.INFORMATION)
-                        .textAttributes(CUSTOM_TAG)
-                        .create()
-                }
-            }
         }
     }
 
     private fun isCustomComponent(tagName: String): Boolean {
         val tag = tagName.lowercase()
         
-        // First check if it's in our force include list
         if (tag in FORCE_INCLUDE_TAGS) {
             return true
         }
         
-        // Then check if it's a standard HTML tag we want to exclude
-        if (tag in STANDARD_HTML_TAGS) {
-            return false
-        }
-        
-        // Finally check for custom component patterns
         return tagName.contains("-") || 
                (tagName.isNotEmpty() && tagName[0].isUpperCase())
     }
