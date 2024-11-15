@@ -9,13 +9,9 @@
     <depends>com.intellij.modules.xml</depends>
 
     <extensions defaultExtensionNs="com.intellij">
-        <annotator 
-            language="Vue" 
-            implementationClass="com.example.booleanhighlighter.VueHighlighterAnnotator"/>
-        <annotator 
-            language="JavaScript" 
-            implementationClass="com.example.booleanhighlighter.VueHighlighterAnnotator"/>
-        <xml.tagNameProvider 
-            implementation="com.example.booleanhighlighter.VueHighlighterAnnotator"/>
+        <annotator language="Vue" implementationClass="com.example.booleanhighlighter.BooleanAnnotator"/>
+        <annotator language="JavaScript" implementationClass="com.example.booleanhighlighter.BooleanAnnotator"/>
+        <annotator language="Vue" implementationClass="com.example.booleanhighlighter.CustomTagAnnotator"/>
+        <annotator language="Vue" implementationClass="com.example.booleanhighlighter.TagBracketAnnotator"/>
     </extensions>
 </idea-plugin>
